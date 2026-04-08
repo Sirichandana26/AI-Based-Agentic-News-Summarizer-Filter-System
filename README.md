@@ -60,14 +60,11 @@ o	Gmail (Send Message)
 •	LLM prompt engineering concepts
 
 9. 🎥 Recording
-👉 (Add your demo video link here)
-Example:
-•	Google Drive / YouTube link 
+
 
 9. 📸 Screenshots
 Include:
-•	n8n workflow screenshot 
-•	Output email screenshot 
+
 
 10. 🧾 Proper Formatting and Alignment
 •	Structured using headings and sections 
