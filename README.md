@@ -63,13 +63,11 @@ o	Gmail (Send Message)
 
 
 
-9. 📸 Screenshots
+10. 📸 Screenshots
 Include:
+   Work flow--Work Flow.png
    Output--Output.png
    
-
-
-
 11. 🧾 Proper Formatting and Alignment
 •	Structured using headings and sections 
 •	Clear separation of components 
