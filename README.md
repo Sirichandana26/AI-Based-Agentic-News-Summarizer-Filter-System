@@ -65,15 +65,17 @@ o	Gmail (Send Message)
 
 9. 📸 Screenshots
 Include:
+  
 
 
-10. 🧾 Proper Formatting and Alignment
+
+11. 🧾 Proper Formatting and Alignment
 •	Structured using headings and sections 
 •	Clear separation of components 
 •	Easy to read and understand 
 •	Suitable for academic submission 
 
-11. ⚠️ Problems Faced and Solutions
+12. ⚠️ Problems Faced and Solutions
 🔴 Problem 1: Gemini API quota exceeded
 👉 Solution: Switched to OpenRouter API
 
