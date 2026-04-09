@@ -1,0 +1,177 @@
+{
+  "name": "AI-Based-Agentic-News-Summarizer-Filter-System",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "e57622d1-b518-409c-81b4-f292f5b69457",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "e01c94b6-9836-40cd-8206-f06152db1992",
+      "name": "RSS Read"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://openrouter.ai/api/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer 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"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"openrouter/auto\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Summarize this news in 2 lines and tell if it is IMPORTANT or NOT IMPORTANT for a user interested in TECHNOLOGY and AI:\\n\\n{{$json.title}}\\n{{$json.contentSnippet}}\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        416,
+        0
+      ],
+      "id": "d57a25f4-84d2-4536-8c4a-57a09167db7a",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "c8fbe91e-691b-41c1-8b44-a575f474dba9",
+              "leftValue": "={{ $json.choices[0].message.content }}",
+              "rightValue": "IMPORTANT",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        624,
+        0
+      ],
+      "id": "3f7b48f3-68a7-4190-af7a-4ce35a733d88",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "sendTo": "sirichandanareddy5767@gmail.com",
+        "subject": "Important News Alert 🚨",
+        "message": "={{ $json.choices[0].message.content }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        864,
+        -160
+      ],
+      "id": "4aa16f16-1e8e-49d3-89db-1440a8d514cd",
+      "name": "Send a message",
+      "webhookId": "4f523cd1-6fa4-4073-9011-973fd1073458",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "q2DusRIWn3zF2hs9",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "RSS Read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Read": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "fb3b7d0a-6b3b-4777-880e-6102eb389567",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "7e91c71d06aa0f0c0c64156424e3699f222d1eb7d81aa51b8fe420adb593f634"
+  },
+  "id": "noglNL8iayzy1RAd",
+  "tags": []
+}
