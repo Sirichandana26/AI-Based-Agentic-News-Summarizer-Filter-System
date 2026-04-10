@@ -65,8 +65,8 @@ https://drive.google.com/file/d/1FtplNyEEhesLvO7_OnxAIr-LltIVdiH9/view?usp=drive
 
 10. 📸 Screenshots
 Include:
-   Work flow--Work Flow.png
-   Output--Output.png
+   Output--https://drive.google.com/file/d/1tT694-jz0bsCnCAJt7iOuPHncY197yuz/view?usp=sharing
+   workflow--https://drive.google.com/file/d/14Neg4Er_Drh4xo7rOmJarFxKaI1g1g4z/view?usp=sharing
    
 11. 🧾 Proper Formatting and Alignment
 •	Structured using headings and sections 
